@@ -1,32 +1,32 @@
-# React + TypeScript + Vite
+# AI Recipe Generator — Mission Bhattarai
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+CSCE 3420: Serverless Web Application using Generative AI.
 
-Currently, two official plugins are available:
+Based on the AWS tutorial linked by the professor:
+https://aws.amazon.com/getting-started/hands-on/build-serverless-web-app-lambda-apigateway-s3-dynamodb-cognito/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Application
 
-## React Compiler
+React + TypeScript and Vite frontend, AWS Amplify Hosting, Amplify Auth (Amazon Cognito), Amplify Data (AWS AppSync), and an authenticated custom HTTP resolver invoking Amazon Bedrock.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The frontend follows Step 5 and visibly includes Mission Bhattarai's name for the required browser screenshot.
 
-## Expanding the Oxlint configuration
+## Compatibility changes approved by the student
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+- Region: Ohio (us-east-2). The account's service control policy denies Amplify in us-east-1.
+- Model: Claude Sonnet 4.6 through its US inference profile. AWS reports that the tutorial's Claude 3.5 Sonnet v2 model has reached end of life.
+- Type-only imports and the App import match the current Vite TypeScript starter.
+- Returned API errors are displayed so a failed request is visible during verification.
+- The generated npm lock file was repaired with npm 10.8.2, matching AWS, to include missing OpenTelemetry dependency entries; package versions were preserved.
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+## Development
+
+```sh
+npm ci
+AWS_REGION=us-east-2 npx ampx sandbox
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+The backend deployment generates amplify_outputs.json. This file is deliberately ignored by git. Create an app account, confirm the emailed verification code, sign in, enter ingredients, and select Generate.
+
+Capture the browser screenshot with Mission Bhattarai visible before deleting any resources. Canvas requests the screenshot, not this source code.
